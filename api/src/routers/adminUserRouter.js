@@ -14,6 +14,7 @@ import {
 const router = express.Router();
 import { v4 as uuidv4 } from "uuid";
 import {
+  otpNotification,
   userVerifiednotification,
   verificationEmail,
 } from "../helpers/emailHelper.js";

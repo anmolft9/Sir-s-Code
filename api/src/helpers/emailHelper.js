@@ -88,7 +88,7 @@ export const otpNotification = (emailData) => {
     subject: "OTP for Password Reset", // Subject line
     text: `Hi ${emailData.fName}, Please use the following OTP to reset your password. ${emailData.otp} `, // plain text body
     html: `
-        <p>Hi ${emailData.otp}</p>
+        <p>Hi ${emailData.fName}</p>
         <br />
         <br />
         <p> Please use the following OTP to reset your password.

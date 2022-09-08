@@ -13,6 +13,7 @@ import PaymentMethod from "./pages/payment-method/PaymentMethod";
 import NewProduct from "./pages/products/NewProduct";
 import EditProduct from "./pages/products/EditProduct";
 import { AdminProfile } from "./pages/admin-profile/AdminProfile";
+import { ResetPassword } from "./pages/login/ResetPassword";
 
 function App() {
   return (
@@ -81,6 +82,7 @@ function App() {
           <Route path="/" element={<LoginPage />} />
           <Route path="/register" element={<AdminRegistration />} />
           <Route path="/admin/verify-email" element={<EmailVerification />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
         </Routes>
       </BrowserRouter>
       <ToastContainer />
