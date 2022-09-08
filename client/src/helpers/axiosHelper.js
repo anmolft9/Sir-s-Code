@@ -110,7 +110,7 @@ export const updateAdminUserPassword = (data) => {
 };
 
 //reset password
-export const resetAdminUserPassword = (data) => {
+export const requestResetAdminUserPassword = (data) => {
   const option = {
     method: "post",
     url: adminUserEP + "/request-password-reset-otp",

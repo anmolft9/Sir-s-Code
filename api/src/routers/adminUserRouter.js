@@ -287,7 +287,7 @@ router.post("/request-password-reset-otp", async (req, res, next) => {
 
     res.json({
       status: "success",
-      message: "todo",
+      message: "OTP sent to your email",
     });
   } catch (error) {
     next(error);
