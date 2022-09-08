@@ -165,3 +165,13 @@ export const updatePasswordValidation = (req, res, next) => {
 
   validator(schema, req, res, next);
 };
+
+export const resetAdminPasswordValidation = (req, res, next) => {
+  const schema = Joi.object({
+    email: EMAIL.required(),
+    password: SHORTSTR.required(),
+    otp: NUMBER.required(),
+  });
+
+  validator(schema, req, res, next);
+};

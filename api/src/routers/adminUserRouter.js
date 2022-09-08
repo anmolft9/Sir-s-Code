@@ -4,6 +4,7 @@ import {
   emailVerificationValidation,
   loginValidation,
   newAdminUserValidation,
+  resetAdminPasswordValidation,
   updatePasswordValidation,
 } from "../middlewares/joi-validation/joiValidation.js";
 import {
@@ -25,7 +26,10 @@ import {
 } from "../helpers/jwtHelper.js";
 import { adminAuth } from "../middlewares/auth-middleware/authMiddleware.js";
 import { createOTP } from "./utils/randomGenerator.js";
-import { insertSession } from "../models/session/SessionModel.js";
+import {
+  deleteSession,
+  insertSession,
+} from "../models/session/SessionModel.js";
 
 router.get("/", adminAuth, (req, res, next) => {
   try {
@@ -293,5 +297,47 @@ router.post("/request-password-reset-otp", async (req, res, next) => {
     next(error);
   }
 });
+
+router.patch(
+  "/reset-password",
+  resetAdminPasswordValidation,
+  async (req, res, next) => {
+    try {
+      const { email, otp, password } = req.body;
+      // console.log(req.body);
+
+      const filter = {
+        token: otp,
+        associate: email,
+        type: "updatePassword",
+      };
+
+      ///find if the filter exist in the session table and delete it
+      const result = await deleteSession(filter);
+      if (result?._id) {
+        const encrypted = hashPassword(password);
+        const user = await updateOneAdminUser(
+          { email },
+          { password: encrypted }
+        );
+        if (user?._id) {
+          res.json({
+            status: "success",
+            message: "password updated successfully",
+          });
+        }
+      }
+      res.json({
+        status: "error",
+        message: "invalid req",
+      });
+
+      //if delete is succeed,
+      //then, encrypt the password and update in userTable by email id
+    } catch (error) {
+      next(error);
+    }
+  }
+);
 
 export default router;

@@ -119,6 +119,15 @@ export const requestResetAdminUserPassword = (data) => {
   return apiProcesser(option);
 };
 
+export const resetAdminUserPassword = (data) => {
+  const option = {
+    method: "patch",
+    url: adminUserEP + "/reset-password",
+    data,
+  };
+  return apiProcesser(option);
+};
+
 //fetch new accessJWT
 export const getNewAccessJWT = async () => {
   const token = localStorage.getItem("refreshJWT");

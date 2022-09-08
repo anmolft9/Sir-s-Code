@@ -10,6 +10,7 @@ export const ResetPasswordForm = ({ handleOnPasswordUpdate }) => {
     const { name, value } = e.target;
 
     setForm({ ...form, [name]: value });
+
     setError("");
 
     ///error boundry
@@ -35,7 +36,8 @@ export const ResetPasswordForm = ({ handleOnPasswordUpdate }) => {
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
-    handleOnPasswordUpdate(form);
+    const { confirmPassword, ...rest } = form;
+    handleOnPasswordUpdate(rest);
   };
   console.log(form);
   return (
@@ -83,6 +85,7 @@ export const ResetPasswordForm = ({ handleOnPasswordUpdate }) => {
             Update Password
           </Button>
         </Form.Group>
+        <a href="/reset-password">Request OTP</a>
       </Form>
     </div>
   );
